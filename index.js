@@ -9,7 +9,7 @@ const cache = {};
 function isFunction(functionToCheck) {
   return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
  }
-module.exports = (path, locals = {}, callback) => {
+function jsxEngine(path, locals = {}, callback) {
   const res = new Promise(async (resolve, reject) => {
     let f;
     if (cache[path]) {
@@ -39,3 +39,6 @@ module.exports = (path, locals = {}, callback) => {
     callback(err);
   })
 }
+
+jsxEngine.__express = jsxEngine;
+module.exports = jsxEngine;
