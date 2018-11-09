@@ -8,27 +8,25 @@ const { transform } = babel;
 const cache = {};
 function isFunction(functionToCheck) {
   return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
- }
-function jsxEngine(path, locals = {}, callback) {
-  const res = new Promise(async (resolve, reject) => {
+}
+function renderFile(path, locals = {}, callback) {
+  const res =  new Promise(async (resolve, reject) => {
     let f;
     if (cache[path]) {
       f = cache[path];
     } else {
-      const code = (await transform((await readFile(path)).toString(), {
-        plugins: [['@babel/plugin-transform-react-jsx', {
-          pragma: 'jsx'
-        }]],
-      })).code;
-      const context = {module: {}, jsx, require };
-      vm.runInNewContext(code, context);
-      if (!context.module || !context.module.exports || !isFunction(context.module.exports)) {
-        return reject('JSX file must return a function');
+      try {
+        f = await compile((await readFile(path)).toString());
+        cache[path] = f;
+      } catch (e) {
+        reject(e);
       }
-      f = context.module.exports;
-      cache[path] = f;
     }
-    resolve(jsx.render(f(locals)));
+    try {
+      resolve(jsxEngine(f, locals));
+    } catch (e) {
+      reject(e);
+    }
   });
   if (!callback) {
     return res;
@@ -39,6 +37,47 @@ function jsxEngine(path, locals = {}, callback) {
     callback(err);
   })
 }
+function render(code, locals = {}, callback) {
+  const res =  new Promise(async (resolve, reject) => {
+    try {
+      const f = await compile(code);
+      resolve(jsxEngine(f, locals));
+    } catch (e) {
+      reject(e);
+    }
+  });
+  if (!callback) {
+    return res;
+  } else {
+    res.then((html) => {
+      callback(undefined, html);
+    }).catch((err) => {
+      callback(err);
+    })
+  }
+}
+async function compile(code) {
+  try {
+    code = (await transform(code, {
+      plugins: [['@babel/plugin-transform-react-jsx', {
+        pragma: 'jsx'
+      }]],
+    })).code;
+  } catch (e) {
+    throw e;
+  }
+  const context = {module: {}, jsx, require };
+  vm.runInNewContext(code, context);
+  if (!context.module || !context.module.exports || !isFunction(context.module.exports)) {
+    throw new Error('JSX file must return a function');
+  }
+  f = context.module.exports;
+  return f;
+}
+function jsxEngine(f, locals = {}) {
+  return jsx.render(f(locals));
+}
 
-jsxEngine.__express = jsxEngine;
-module.exports = jsxEngine;
+renderFile.__express = renderFile;
+renderFile.render = render;
+module.exports = renderFile;
