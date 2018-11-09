@@ -1,0 +1,11 @@
+{
+  "name": "jsx-engine",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/plugin-transform-react-jsx": "^7.0.0",
+    "babel": "^6.23.0"
+  }
+}
