@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "test": "exit 0;"
+  },
+  "homepage": "https://github.com/dotconnor/jsx-engine",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dotconnor/jsx-engine.git"
+  },
   "dependencies": {
     "@babel/core": "^7.1.5",
     "@babel/plugin-transform-react-jsx": "^7.0.0",
