@@ -28,6 +28,8 @@ jsx.render = function render(vnode) {
       n += ` ${k}="${css(a[k])}"`;
     } else if (k === 'children') {
       Object.assign(vnode.attributes, {children: a[k]})
+    } else if (k === 'className') {
+      n += ` class="${a[k]}"`
     } else {
       n += ` ${k}="${a[k]}"`
     }
