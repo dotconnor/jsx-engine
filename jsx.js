@@ -24,10 +24,10 @@ jsx.render = function render(vnode) {
   let n = `<${vnode.nodeName}`
   let a = vnode.attributes || {};
   Object.keys(a).forEach( k => {
-    if (k === 'style') {
+    if (k === 'style' && typeof a[k] === 'object') {
       n += ` ${k}="${css(a[k])}"`;
     } else if (k === 'children') {
-
+      Object.assign(vnode.attributes, {children: a[k]})
     } else {
       n += ` ${k}="${a[k]}"`
     }
@@ -35,7 +35,11 @@ jsx.render = function render(vnode) {
   n += ">";
   // render (build) and then append child nodes:
   ((vnode.attributes && vnode.attributes.children) || vnode.children || []).forEach( c => n += render(c) );
-  n += `</${vnode.nodeName}>`;
+  if (['area', 'base', 'col', 'embed', 'link', 'track', 'wbr', 'param', 'source', 'img', 'input', 'br', 'hr', 'meta'].includes(vnode.nodeName)) {
+    n += ' >';
+  } else {
+    n += `</${vnode.nodeName}>`;
+  }
   return n;
 }
 module.exports = jsx;
