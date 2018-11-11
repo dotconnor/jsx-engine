@@ -35,13 +35,13 @@ jsx.render = function render(vnode) {
     }
   });
   n += ">";
+  // if self closing tag then just return
+  if (['area', 'base', 'col', 'embed', 'link', 'track', 'wbr', 'param', 'source', 'img', 'input', 'br', 'hr', 'meta'].includes(vnode.nodeName)) {
+    return n;
+  }
   // render (build) and then append child nodes:
   ((vnode.attributes && vnode.attributes.children) || vnode.children || []).forEach( c => n += render(c) );
-  if (['area', 'base', 'col', 'embed', 'link', 'track', 'wbr', 'param', 'source', 'img', 'input', 'br', 'hr', 'meta'].includes(vnode.nodeName)) {
-    n += ' >';
-  } else {
-    n += `</${vnode.nodeName}>`;
-  }
+  n += `</${vnode.nodeName}>`;
   return n;
 }
 module.exports = jsx;
