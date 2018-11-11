@@ -12,7 +12,7 @@ function isFunction(functionToCheck) {
 function renderFile(path, locals = {}, callback) {
   const res =  new Promise(async (resolve, reject) => {
     let f;
-    if (cache[path]) {
+    if (cache[path] && (locals && locals.cache)) {
       f = cache[path];
     } else {
       try {
