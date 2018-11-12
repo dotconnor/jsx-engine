@@ -60,7 +60,8 @@ async function compile(code) {
   try {
     code = (await transform(code, {
       plugins: [['@babel/plugin-transform-react-jsx', {
-        pragma: 'jsx'
+        pragma: 'jsx',
+        pragmaFrag: 'jsx.Fragment',
       }]],
     })).code;
   } catch (e) {
