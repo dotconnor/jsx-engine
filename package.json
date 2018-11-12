@@ -1,8 +1,19 @@
 {
   "name": "jsx-engine",
+  "description": "JSX renderer for Express",
   "version": "1.2.0",
   "main": "index.js",
   "license": "MIT",
+  "author": {
+    "email": "connor@dotconnor.com",
+    "name": "Connor Love"
+  },
+  "keywords": [
+    "jsx",
+    "express",
+    "template",
+    "engine"
+  ],
   "scripts": {
     "test": "jest --verbose --coverage"
   },
