@@ -1,4 +1,6 @@
 # jsx-engine
+[![Maintainability](https://api.codeclimate.com/v1/badges/d2a6d8e502df1c974f03/maintainability)](https://codeclimate.com/github/dotconnor/jsx-engine/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/d2a6d8e502df1c974f03/test_coverage)](https://codeclimate.com/github/dotconnor/jsx-engine/test_coverage)
 
 ## Install
 ```
