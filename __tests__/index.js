@@ -33,9 +33,12 @@ describe("jsx-engine", () => {
   it('should get passed options', async () => {
     expect(await jsx.render(`module.exports = (opts) => <div>{opts.hey}</div>`, {hey: 'hey'})).toBe('<div>hey</div>')
   });
+  it('should allow fragments', async () => {
+    expect(await jsx.render(`module.exports = () => <><div /><div /></>`, {})).toBe('<div></div><div></div>');
+  });
   describe('rejects', () => {
     it('should fail with parser error', () => {
       expect(jsx.render('<div>{{}}')).rejects;
     })
-  })
+  });
 });
