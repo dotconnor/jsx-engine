@@ -9,41 +9,21 @@ const cache = {};
 function isFunction(functionToCheck) {
   return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
 }
-function renderFile(path, locals = {}, callback) {
+async function renderFile(path, locals = {}, callback) {
+  return render((await readFile(path)).toString(), locals, callback, path);
+}
+function render(code, locals = {}, callback, path) {
   const res =  new Promise(async (resolve, reject) => {
     let f;
     if (cache[path] && (locals && locals.cache)) {
       f = cache[path];
     } else {
       try {
-        f = await compile((await readFile(path)).toString());
-        cache[path] = f;
+        f = await compile(code);
+        resolve(jsxEngine(f, locals));
       } catch (e) {
         reject(e);
       }
-    }
-    try {
-      resolve(jsxEngine(f, locals));
-    } catch (e) {
-      reject(e);
-    }
-  });
-  if (!callback) {
-    return res;
-  }
-  res.then((html) => {
-    callback(undefined, html);
-  }).catch((err) => {
-    callback(err);
-  })
-}
-function render(code, locals = {}, callback) {
-  const res =  new Promise(async (resolve, reject) => {
-    try {
-      const f = await compile(code);
-      resolve(jsxEngine(f, locals));
-    } catch (e) {
-      reject(e);
     }
   });
   if (!callback) {
