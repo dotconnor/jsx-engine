@@ -12,29 +12,26 @@ function isFunction(functionToCheck) {
 async function renderFile(path, locals = {}, callback) {
   return render((await readFile(path)).toString(), locals, callback, path);
 }
-function render(code, locals = {}, callback, path) {
-  const res =  new Promise(async (resolve, reject) => {
-    let f;
-    if (cache[path] && (locals && locals.cache)) {
-      f = cache[path];
-    } else {
-      try {
-        f = await compile(code);
-        resolve(jsxEngine(f, locals));
-      } catch (e) {
-        reject(e);
-      }
-    }
-  });
-  if (!callback) {
-    return res;
+async function render(code, locals = {}, callback, path) {
+  let f;
+  if (path && cache[path] && (locals && locals.cache)) {
+    f = cache[path];
   } else {
-    res.then((html) => {
-      callback(undefined, html);
-    }).catch((err) => {
-      callback(err);
-    })
+    try {
+      f = await compile(code);
+    } catch (e) {
+      if (callback) {
+        callback(e)
+        return;
+      }
+      throw e;
+    }
   }
+  const html = jsxEngine(f, locals);
+  if (!callback) {
+    return html;
+  }
+  callback(undefined, html);
 }
 async function compile(code) {
   try {
