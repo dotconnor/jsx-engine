@@ -3,7 +3,8 @@ const addPx = require('add-px-to-style');
 function jsx(nodeName, attributes, ...args) {
   let children = args.length ? [].concat(...args) : null;
   return { nodeName, attributes, children };
-};
+}
+jsx.Fragment = Symbol('Fragment');
 function css(style) {
   return Object.entries(style).reduce((styleString, [propName, propValue]) => {
     propName = propName.replace(/([A-Z])/g, matches => `-${matches[0].toLowerCase()}`);
@@ -32,6 +33,7 @@ jsx.render = function render(vnode) {
   if (!vnode) return "";
   if (vnode.split) return vnode;
   if (isFunction(vnode.nodeName)) return render(vnode.nodeName({ ...vnode.attributes, children: (vnode.attributes && vnode.attributes.children) || vnode.children}));
+  if (vnode.nodeName === jsx.Fragment) return (vnode.children || []).map(a => render(a)).join('');
   let html = `<${vnode.nodeName}`
   let attributes = vnode.attributes || {};
   html += buildAtrributes(attributes);
