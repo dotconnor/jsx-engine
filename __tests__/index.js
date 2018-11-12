@@ -25,7 +25,7 @@ describe("jsx-engine", () => {
     expect(await jsx.render(`module.exports = () => <div children={[<div></div>]}></div>`)).toBe('<div><div></div></div>')
   });
   it('should return undefined (soft-fail) when no function is given', async () => {
-    expect(await jsx.render(`module.exports = () => {<div></div>}`)).toBe('undefined');
+    expect(await jsx.render(`module.exports = () => {<div></div>}`)).toBe('');
   });
   it('should render a string', async () => {
     expect(await jsx.render(`module.exports = () => <div>hey</div>`)).toBe('<div>hey</div>')
