@@ -20,7 +20,7 @@ function buildAtrributes(attributes) {
     if (key === 'style' && typeof attributes[key] === 'object') {
       html += ` ${key}="${css(attributes[key])}"`;
     } else if (key === 'children') {
-      Object.assign(vnode.attributes, {children: attributes[key]})
+      Object.assign(attributes, {children: attributes[key]})
     } else if (key === 'className') {
       html += ` class="${attributes[key]}"`
     } else {
@@ -43,7 +43,7 @@ jsx.render = function render(vnode) {
     return html;
   }
   // render (build) and then append child nodes:
-  html += ((vnode.attributes && vnode.attributes.children) || vnode.children || []).map(child => render(child)).join('');
+  html += ((attributes && attributes.children) || vnode.children || []).map(child => render(child)).join('');
   html += `</${vnode.nodeName}>`;
   return html;
 }
