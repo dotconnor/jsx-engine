@@ -1,13 +1,17 @@
-const View = ({children}) => {
-  return (
-    <Div>{children}</Div>
-  )
-}
-const Div = ({children}) => {
-  return (
-    <div>{children}</div>
-  )
-}
+const Div = ({ children }) => {
+  return <div>{children}</div>;
+};
+
+const View = ({ children }) => {
+  return <Div>{children}</Div>;
+};
+
 module.exports = () => {
-  return (<View children={[<div></div>]}><View><div></div></View></View>)
-}
+  return (
+    <View>
+      <View>
+        <div></div>
+      </View>
+    </View>
+  );
+};
