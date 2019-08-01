@@ -2,7 +2,7 @@
   "name": "jsx-engine",
   "description": "JSX renderer for Express",
   "version": "1.2.1",
-  "main": "index.js",
+  "main": "lib/index.js",
   "license": "MIT",
   "author": {
     "email": "connor@dotconnor.com",
@@ -14,8 +14,11 @@
     "template",
     "engine"
   ],
+  "types": "lib/",
   "scripts": {
-    "test": "jest --verbose --coverage"
+    "build": "tsc",
+    "lint": "eslint --format=\"pretty\" './src/**/*.ts'",
+    "test": "nyc --reporter=lcov --reporter=text ava --verbose"
   },
   "homepage": "https://github.com/dotconnor/jsx-engine",
   "repository": {
@@ -24,16 +27,42 @@
   },
   "dependencies": {
     "@babel/core": "^7.1.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.5.0",
     "@babel/plugin-transform-react-jsx": "^7.0.0",
     "add-px-to-style": "^1.0.0"
   },
   "devDependencies": {
-    "jest": "^23.6.0"
+    "@istanbuljs/nyc-config-typescript": "^0.1.3",
+    "@types/babel__core": "^7.1.2",
+    "@types/node": "^12.6.8",
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
+    "ava": "^2.2.0",
+    "babel-eslint": ">=10.0.2",
+    "eslint": ">=5.12.1",
+    "eslint-config-a1motion": "3.0.1",
+    "eslint-config-prettier": ">=6.0.0",
+    "eslint-formatter-pretty": "^2.1.1",
+    "eslint-plugin-prettier": ">=3.1.0",
+    "eslint-plugin-react": ">=7.14.2",
+    "express": "^4.17.1",
+    "nyc": "^14.1.1",
+    "prettier": ">=1.17.1",
+    "supertest": "^4.0.2",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
   },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      ".*\\.jsx"
+  "ava": {
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "./__tests__/_register.js"
     ]
+  },
+  "nyc": {
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "check-coverage": true
   }
 }
