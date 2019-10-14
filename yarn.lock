@@ -494,7 +494,7 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.8.tgz#e469b4bf9d1c9832aee4907ba8a051494357c12c"
   integrity sha512-aX+gFgA5GHcDi89KG5keey2zf0WfZk/HAQotEamsK2kbey+8yGKcson0hbK8E+v0NArlCJQCqMP161YhV6ZXLg==
 
-"@typescript-eslint/eslint-plugin@>=1.13.0", "@typescript-eslint/eslint-plugin@^1.13.0":
+"@typescript-eslint/eslint-plugin@^1.13.0":
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-1.13.0.tgz#22fed9b16ddfeb402fd7bcde56307820f6ebc49f"
   integrity sha512-WQHCozMnuNADiqMtsNzp96FNox5sOVpU8Xt4meaT4em8lOG1SrOv92/mUbEHQVh90sldKSfcOc/I0FOb/14G1g==
@@ -514,7 +514,7 @@
     "@typescript-eslint/typescript-estree" "1.13.0"
     eslint-scope "^4.0.0"
 
-"@typescript-eslint/parser@>=1.13.0", "@typescript-eslint/parser@^1.13.0":
+"@typescript-eslint/parser@^1.13.0":
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-1.13.0.tgz#61ac7811ea52791c47dc9fd4dd4a184fae9ac355"
   integrity sha512-ITMBs52PCPgLb2nGPoeT4iU3HdQZHcPaZVw+7CsFagRJHUhyeTgorEwHXhFf3e7Evzi8oujKNpHc8TONth8AdQ==
@@ -1529,13 +1529,10 @@ escape-string-regexp@^2.0.0:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-2.0.0.tgz#a30304e99daa32e23b2fd20f51babd07cffca344"
   integrity sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w==
 
-eslint-config-a1motion@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-a1motion/-/eslint-config-a1motion-3.0.1.tgz#85b79ebd9cb8cb7716b517bae3e85ad2a7b704c3"
-  integrity sha512-bsZ0ycbTjK51SPApiKV98jZWpQp6ZJ9lphtDVSSwdi//MKsIhjE5sWjHpgRNLOGNqiCUTcMNhplvM7la2hesHA==
-  optionalDependencies:
-    "@typescript-eslint/eslint-plugin" ">=1.13.0"
-    "@typescript-eslint/parser" ">=1.13.0"
+eslint-config-a1motion@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-a1motion/-/eslint-config-a1motion-3.1.0.tgz#7014837bcc542f4c6c9ed525043cc0975f1c1836"
+  integrity sha512-ks0GW2WHkKYLB7Sy9GLegTL5/ltJBh4mp+JgMZDM7yxcDRzVJuwQuB6+lGJmhWFEaDiXks0VG5+/WBFjI4QQlw==
 
 eslint-config-prettier@>=6.0.0:
   version "6.0.0"
