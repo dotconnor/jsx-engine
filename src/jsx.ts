@@ -20,8 +20,6 @@ function jsx(nodeName: string, attributes: {}, ...args: VNode[]): VNode {
   return { nodeName, attributes, children };
 }
 
-jsx.Fragment = Fragment;
-
 function css(style: {}): string {
   return Object.entries(style)
     .reduce((styleString, [propName, propValue]) => {
@@ -69,7 +67,7 @@ jsx.render = function render(vnode: VNode): string {
     );
   }
 
-  if (vnode.nodeName === jsx.Fragment) {
+  if (vnode.nodeName === Fragment) {
     return (vnode.children || []).map((child) => render(child)).join(``);
   }
 
@@ -110,3 +108,5 @@ export default jsx;
 export { Fragment };
 
 module.exports = jsx;
+
+module.exports.Fragment = Fragment;
