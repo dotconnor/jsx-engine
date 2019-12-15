@@ -107,4 +107,6 @@ jsx.render = function render(vnode: VNode): string {
 
 export default jsx;
 
+export { Fragment };
+
 module.exports = jsx;
