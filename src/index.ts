@@ -1,7 +1,7 @@
 import vm from "vm";
-import { readFile, readFileSync } from "fs";
+import { readFile, readFileSync, existsSync } from "fs";
 import { promisify } from "util";
-import { join, dirname } from "path";
+import { join, dirname, parse } from "path";
 import { transform, transformSync } from "@babel/core";
 import jsx, { Component } from "./jsx";
 
@@ -31,14 +31,36 @@ const babelOptions = {
   ],
 };
 
+const extensionsToLookFor = [`jsx`, `js`];
+
+function findFile(path: string): string {
+  if (parse(path).ext.length > 0) {
+    return path;
+  }
+
+  for (let i = 0; i < extensionsToLookFor.length; i++) {
+    const _path = `${path}.${extensionsToLookFor[i]}`;
+    if (existsSync(_path)) {
+      return _path;
+    }
+  }
+
+  return path;
+}
+
 const vmRequire = (_path: string): any => (path: string): any => {
   /* istanbul ignore if  */
   if (!_path || typeof _path !== `string`) {
     throw new Error(`Cannot not require without a proper path.`);
   }
 
+  if (!path.startsWith(`.`)) {
+    return require(path);
+  }
+
   const modPath = join(_path, path);
-  const _code = readFileSync(modPath).toString();
+
+  const _code = readFileSync(findFile(modPath)).toString();
   const result = transformSync(_code, babelOptions);
 
   /* istanbul ignore if  */

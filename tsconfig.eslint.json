@@ -4,17 +4,18 @@
     "module": "commonjs",
     "declaration": true,
     "outDir": "lib",
-    "rootDir": "src",
-    "removeComments": false,
+    "rootDir": "./",
     "incremental": true,
+    "removeComments": true,
+    "importHelpers": true,
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "noEmit": true
   },
   "exclude": [
-    "__tests__/**",
     "lib/**"
   ]
 }

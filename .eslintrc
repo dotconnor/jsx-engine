@@ -1,3 +1,8 @@
 {
-  "extends": ["a1motion/typescript"]
+  "extends": [
+    "a1motion/typescript"
+  ],
+  "parserOptions": {
+    "project": "tsconfig.eslint.json"
+  }
 }
