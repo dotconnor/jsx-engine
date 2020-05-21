@@ -1,7 +1,7 @@
 {
   "name": "jsx-engine",
   "description": "JSX renderer for Express",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "main": "lib/index.js",
   "license": "MIT",
   "author": {
