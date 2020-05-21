@@ -1,16 +1,16 @@
-const Div = ({ children }) => {
+function Div({ children }) {
   return <div>{children}</div>;
-};
+}
 
-const View = ({ children }) => {
+function View({ children }) {
   return <Div>{children}</Div>;
-};
+}
 
 module.exports = () => {
   return (
     <View>
       <View>
-        <div></div>
+        <div />
       </View>
     </View>
   );

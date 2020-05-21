@@ -1,8 +1,12 @@
 {
   "extends": [
-    "a1motion/typescript"
+    "a1motion/typescript-react"
   ],
   "parserOptions": {
-    "project": "tsconfig.eslint.json"
+    "project": "tsconfig.eslint.json",
+    "createDefaultProgram": true
+  },
+  "rules": {
+    "react/react-in-jsx-scope": 0
   }
 }

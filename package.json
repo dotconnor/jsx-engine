@@ -22,8 +22,8 @@
   "types": "lib/",
   "scripts": {
     "build": "tsc",
-    "lint": "eslint --format=\"pretty\" './src/**/*.ts'",
-    "test": "nyc --reporter=lcov --reporter=text ava --verbose"
+    "lint": "eslint --format=\"pretty\" \"**/*.{js,ts,jsx,tsx}\"",
+    "test": "ava --verbose"
   },
   "homepage": "https://github.com/dotconnor/jsx-engine",
   "repository": {
@@ -37,7 +37,6 @@
     "add-px-to-style": "^1.0.0"
   },
   "devDependencies": {
-    "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/babel__core": "^7.1.7",
     "@types/node": "^14.0.5",
     "@typescript-eslint/eslint-plugin": "^3.0.0",
@@ -51,23 +50,17 @@
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-react": "^7.20.0",
     "express": "^4.17.1",
-    "nyc": "^15.0.1",
     "prettier": "^2.0.5",
     "supertest": "^4.0.2",
     "ts-node": "^8.10.1",
     "typescript": "^3.9.3"
   },
   "ava": {
-    "compileEnhancements": false,
     "extensions": [
       "ts"
     ],
     "require": [
       "./__tests__/_register.js"
     ]
-  },
-  "nyc": {
-    "extends": "@istanbuljs/nyc-config-typescript",
-    "check-coverage": true
   }
 }

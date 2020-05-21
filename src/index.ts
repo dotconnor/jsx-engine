@@ -15,23 +15,22 @@ export interface Locals {
   [key: string]: any;
   cache?: boolean;
 }
-
 export type RenderCallback = (err?: Error | null, result?: string) => void;
 
 const babelOptions = {
   plugins: [
-    `@babel/plugin-transform-modules-commonjs`,
+    "@babel/plugin-transform-modules-commonjs",
     [
-      `@babel/plugin-transform-react-jsx`,
+      "@babel/plugin-transform-react-jsx",
       {
-        pragma: `jsx`,
-        pragmaFrag: `jsx.Fragment`,
+        pragma: "jsx",
+        pragmaFrag: "jsx.Fragment",
       },
     ],
   ],
 };
 
-const extensionsToLookFor = [`jsx`, `js`];
+const extensionsToLookFor = ["jsx", "js"];
 
 function findFile(path: string): string {
   if (parse(path).ext.length > 0) {
@@ -50,11 +49,11 @@ function findFile(path: string): string {
 
 const vmRequire = (_path: string): any => (path: string): any => {
   /* istanbul ignore if  */
-  if (!_path || typeof _path !== `string`) {
-    throw new Error(`Cannot not require without a proper path.`);
+  if (!_path || typeof _path !== "string") {
+    throw new Error("Cannot not require without a proper path.");
   }
 
-  if (!path.startsWith(`.`)) {
+  if (!path.startsWith(".")) {
     return require(path);
   }
 
@@ -75,11 +74,15 @@ const vmRequire = (_path: string): any => (path: string): any => {
     throw new Error(`Could not parse file: ${modPath}`);
   }
 
+  const vmModule = {
+    exports: {},
+  };
+
   const context = vm.createContext({
-    module: {},
+    module: vmModule,
     jsx,
     require: vmRequire(dirname(modPath)),
-    exports: {},
+    exports: vmModule.exports,
   });
   vm.runInContext(code, context);
   return context.module.exports;
@@ -100,18 +103,21 @@ async function compile(_code: string, _path?: string): Promise<Component> {
       throw new Error(`Could not parse file: ${_path}`);
     }
 
+    const vmModule = {
+      exports: {},
+    };
     const context = vm.createContext({
-      module: {},
+      module: vmModule,
       jsx,
       require: _path ? vmRequire(dirname(_path)) : () => void 0,
-      exports: {},
+      exports: vmModule.exports,
     });
     vm.runInContext(code, context);
     let f: Component | undefined;
     if (
       context.module &&
       context.module.exports &&
-      typeof context.module.exports === `function`
+      typeof context.module.exports === "function"
     ) {
       f = context.module.exports;
     }
@@ -119,13 +125,13 @@ async function compile(_code: string, _path?: string): Promise<Component> {
     if (
       context.exports &&
       context.exports.__esModule === true &&
-      typeof context.exports.default === `function`
+      typeof context.exports.default === "function"
     ) {
       f = context.exports.default;
     }
 
     if (!f) {
-      throw new Error(`JSX file must return a function`);
+      throw new Error("JSX file must return a function");
     }
 
     return f;
@@ -151,8 +157,8 @@ async function render(
     cache[path] &&
     ((locals &&
       locals.settings &&
-      locals.settings[`view cache`] &&
-      locals.settings[`view cache`] === true) ||
+      locals.settings["view cache"] &&
+      locals.settings["view cache"] === true) ||
       (locals && locals.cache && locals.cache === true))
   ) {
     f = cache[path];
@@ -192,8 +198,7 @@ export async function renderFile(
 renderFile.__express = renderFile;
 renderFile.render = render;
 
-export const __express = renderFile;
-
-export default renderFile;
-
 module.exports = renderFile;
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const __express = renderFile;
+export default renderFile;
