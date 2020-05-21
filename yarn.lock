@@ -1372,9 +1372,9 @@ escape-string-regexp@^4.0.0:
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
 eslint-config-a1motion@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-a1motion/-/eslint-config-a1motion-3.3.1.tgz#ae005db5b65571865fbcf742d90eac3738375670"
-  integrity sha512-If9F4b5yirDuBxCt1DbYk0Jw6+eXKahRBTgK0UaZUH9S3HpUfSAkOY9pCiQCQjAdPngUZk1y0koBZa/vl3ESTw==
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-a1motion/-/eslint-config-a1motion-3.3.2.tgz#5972ebb7f3786219a4d07475b8c1a914e43b2b6d"
+  integrity sha512-jWzai1t4QKCIfuHJLdpoi7smW+FVj1iMAmeEBDvPMR7cWBP7WJb4IXj8U37UWsk2FQLINi7CVBTgj5nAF/ZZJg==
 
 eslint-config-prettier@^6.11.0:
   version "6.11.0"
