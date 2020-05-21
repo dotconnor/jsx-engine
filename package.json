@@ -21,6 +21,7 @@
   ],
   "types": "lib/",
   "scripts": {
+    "prepack": "yarn build",
     "build": "tsc",
     "lint": "eslint --format=\"pretty\" \"**/*.{js,ts,jsx,tsx}\"",
     "test": "ava --verbose"
